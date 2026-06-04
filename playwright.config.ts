@@ -5,7 +5,7 @@ export default defineConfig({
   globalSetup: './global-setup',
   reporter: 'html',
   use: {
-    headless: false,
+    headless: !!process.env.CI,
     trace: 'on-first-retry',
   },
   projects: [
