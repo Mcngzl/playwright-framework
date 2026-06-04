@@ -1,0 +1,15 @@
+node_modules/
+playwright-report/
+test-results/
+storageState.json
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
