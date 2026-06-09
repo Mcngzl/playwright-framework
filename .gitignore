@@ -2,6 +2,12 @@ node_modules/
 playwright-report/
 test-results/
 storageState.json
+screenshots/
+
+# Environment
+.env
+.env.local
+.env.*.local
 
 # IDE
 .idea/
