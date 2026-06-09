@@ -4,6 +4,10 @@ import { WaitUtils, PageUtils } from '../utils/waits';
 export class BasePage {
   constructor(protected readonly page: Page) {}
 
+  getPage(): Page {
+    return this.page;
+  }
+
   async goto(path: string) {
     await this.page.goto(path);
   }

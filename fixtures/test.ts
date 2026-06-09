@@ -1,11 +1,16 @@
 import { test as base, expect, type BrowserContext, type Page } from '@playwright/test';
 import { LoginPage } from '../pages/login-page';
 import { DashboardPage } from '../pages/dashboard-page';
+import { RijkswaterstattPage } from '../pages/rijkswaterstaat-page';
+import { RijkswaterstattLoginPage } from '../pages/rijkswaterstaat-login-page';
 import { config } from '../config';
 
 type Fixtures = {
   loginPage: LoginPage;
   dashboardPage: DashboardPage;
+  rijkswaterstattPage: RijkswaterstattPage;
+  rijkswaterstattLoginPage: RijkswaterstattLoginPage;
+  rijksAuthPage: Page;
   authContext: BrowserContext;
   authPage: Page;
 };
@@ -18,6 +23,22 @@ export const test = base.extend<Fixtures>({
 
   dashboardPage: async ({ page }, use) => {
     await use(new DashboardPage(page));
+  },
+
+  rijkswaterstattPage: async ({ page }, use) => {
+    await use(new RijkswaterstattPage(page));
+  },
+
+  rijkswaterstattLoginPage: async ({ page }, use) => {
+    await use(new RijkswaterstattLoginPage(page));
+  },
+
+  // Rijkswaterstaat authenticated page
+  rijksAuthPage: async ({ page }, use) => {
+    const loginPage = new RijkswaterstattLoginPage(page);
+    await loginPage.open();
+    await loginPage.login(config.rijksUsername, config.rijksPassword);
+    await use(page);
   },
 
   // Authenticated context and page (from auth-test.ts)
